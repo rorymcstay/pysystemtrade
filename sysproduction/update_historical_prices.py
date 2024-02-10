@@ -317,12 +317,15 @@ def update_historical_prices_for_instrument(
 
     for contract_object in contract_list:
         data.update_log(contract_object.specific_log(data.log))
-        update_historical_prices_for_instrument_and_contract(
-            contract_object,
-            data,
-            cleaning_config=cleaning_config,
-            interactive_mode=interactive_mode,
-        )
+        try:
+            update_historical_prices_for_instrument_and_contract(
+                contract_object,
+                data,
+                cleaning_config=cleaning_config,
+                interactive_mode=interactive_mode,
+            )
+        except Exception as ex:
+            print(f'#### Error updating {contract_object=} {ex.args=}')
 
     return success
 

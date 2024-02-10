@@ -120,8 +120,25 @@ def check_saved_roll_calendar(
 
 
 if __name__ == "__main__":
-    input("Will overwrite existing roll calendar are you sure?! CTL-C to abort")
-    instrument_code = get_valid_instrument_code_from_user(source="single")
+    #input("Will overwrite existing roll calendar are you sure?! CTL-C to abort")
+    #instrument_code = get_valid_instrument_code_from_user(source="single")
     ## MODIFY DATAPATH IF REQUIRED
     # build_and_write_roll_calendar(instrument_code, output_datapath=arg_not_supplied)
-    build_and_write_roll_calendar(instrument_code, output_datapath="/home/rob/")
+    import argparse
+
+    app = argparse.ArgumentParser()
+
+    app.add_argument('--instrument-codes', nargs='+')
+
+    args = app.parse_args()
+
+    for instrument_code in args.instrument_codes:
+
+        try:
+
+            build_and_write_roll_calendar(instrument_code, output_datapath="/home/rory/dev/pysystemtrade/roll_calendars", check_before_writing=False)
+
+        except Exception as ex:
+
+            print(f'Error seeding data for {instrument_code=}, {ex.args=}')
+

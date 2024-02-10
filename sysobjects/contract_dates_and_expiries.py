@@ -37,6 +37,7 @@ def from_contract_numbers_to_contract_string(
 
 
 EXPIRY_DATE_FORMAT = "%Y%m%d"
+EXPIRY_DATE_FORMAT_WITH_TIME = "%Y%m%d %H:%M:%S"
 
 
 class expiryDate(datetime.datetime):
@@ -48,9 +49,8 @@ class expiryDate(datetime.datetime):
         try:
             as_date = datetime.datetime.strptime(date_as_str, EXPIRY_DATE_FORMAT)
         except:
-            raise Exception(
-                "Expiry date %s not in format %s" % date_as_str, EXPIRY_DATE_FORMAT
-            )
+            as_date = datetime.datetime.strptime(
+                    date_as_str.rsplit(' ', maxsplit=1)[0], EXPIRY_DATE_FORMAT_WITH_TIME)
 
         return expiryDate(as_date.year, as_date.month, as_date.day)
 

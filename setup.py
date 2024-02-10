@@ -63,6 +63,12 @@ brokers_csv_files = package_files(brokers_csv_path, "csv")
 brokers_yaml_path = os.path.join(dir_this_file(), "sysbrokers")
 brokers_yaml_files = package_files(brokers_yaml_path, "yaml")
 
+dashboard_path = os.path.join(dir_this_file(), "dashboard")
+dashboard_assets = package_files(dashboard_path, "html")
+dashboard_assets += package_files(dashboard_path, "ico")
+dashboard_assets += package_files(dashboard_path, "css")
+dashboard_assets += package_files(dashboard_path, "js")
+
 package_data = {
     "": private_yaml_files
     + provided_yaml_files

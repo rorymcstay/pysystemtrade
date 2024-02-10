@@ -50,5 +50,6 @@ def init_arctic_with_csv_prices_for_code(
 if __name__ == "__main__":
     ## modify datapaths if required
     init_arctic_with_csv_futures_contract_prices(
-        adj_price_datapath=arg_not_supplied, multiple_price_datapath=arg_not_supplied
+        adj_price_datapath='/home/rory/dev/pysystemtrade/tmpadjprices',
+        multiple_price_datapath='/home/rory/dev/pysystemtrade/tmpmultiprices'
     )

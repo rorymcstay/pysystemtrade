@@ -586,8 +586,11 @@ class reportingApi(object):
 
         roll_data_dict = {}
         for instrument_code in list_of_instruments:
-            roll_data = get_roll_data_for_instrument(instrument_code, data)
-            roll_data_dict[instrument_code] = roll_data
+            try:
+                roll_data = get_roll_data_for_instrument(instrument_code, data)
+                roll_data_dict[instrument_code] = roll_data
+            except Exception as ex:
+                print(f'Error getting roll data for {instrument_code=}, {ex.args=}')
 
         return roll_data_dict
 

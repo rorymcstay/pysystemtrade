@@ -83,7 +83,10 @@ def update_active_contracts_with_data(
         list_of_codes = [instrument_code]
 
     for instrument_code in list_of_codes:
+        #try:
         update_active_contracts_for_instrument(instrument_code, data)
+        #except Exception as ex:
+        #    print(f'error updating {instrument_code=} {ex.args=}')
 
 
 def update_active_contracts_for_instrument(instrument_code: str, data: dataBlob):
@@ -444,7 +447,10 @@ def has_contract_expired(
 ) -> bool:
     data_contracts = dataContracts(data)
     contract = futuresContract(instrument_code, contract_id)
-    actual_contract = data_contracts.get_contract_from_db(contract)
+    try:
+        actual_contract = data_contracts.get_contract_from_db(contract)
+    except Exception as ex:
+        return contract.expired()
 
     return actual_contract.expired()
 

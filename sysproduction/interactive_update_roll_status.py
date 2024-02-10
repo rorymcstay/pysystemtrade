@@ -253,8 +253,12 @@ def include_instrument_in_auto_cycle(
     data: dataBlob, instrument_code: str, days_ahead: int = 10
 ) -> bool:
 
-    days_until_expiry = days_until_earliest_expiry(data, instrument_code)
-    return days_until_expiry <= days_ahead
+    try:
+        days_until_expiry = days_until_earliest_expiry(data, instrument_code)
+        return days_until_expiry <= days_ahead
+    except Exception as ex:
+        print(f'error, {ex.args=}')
+        return False
 
 
 def days_until_earliest_expiry(data: dataBlob, instrument_code: str) -> int:
